@@ -8,18 +8,21 @@ from sqlalchemy import (
     Boolean,
 )
 
-# engine = create_engine("postgresql://user:password@localhost:5432/app")
-engine = create_engine("sqlite:///example-db-01.sqlite", echo=True)
+engine = create_engine("sqlite:///lib.sqlite", echo=True)
 
 
 metadata = MetaData()
 
 users_table = Table(
-    "users",
+    "books",
     metadata,
-    Column("id", Integer, primary_key=True),
-    Column("username", String(32), unique=True),
-    Column("is_staff", Boolean, nullable=False, default=False),
+    Column("file", String(32)),
+    Column("title", String(512), unique=True),
+    Column("genres", String(32)),
+    Column("last_name", String(32)),
+    Column("first_name", String(32)),
+    Column("lang", String(32)),
+    Column("opt", String(32)),
 )
 
 
