@@ -17,7 +17,7 @@ users_table = Table(
     "books",
     metadata,
     Column("file", String(32)),
-    Column("title", String(512), unique=True),
+    Column("title", String(512)),
     Column("genres", String(32)),
     Column("last_name", String(32)),
     Column("first_name", String(32)),
