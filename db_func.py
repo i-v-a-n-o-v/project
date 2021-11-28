@@ -36,13 +36,13 @@ class Book(Base):
     def __str__(self):
         return (
 #            f"{self.__class__.__name__}(file={self.file!r}, "
-            f"(file={self.file!r}, "
-            f"title={self.title!r}, "
-            f"genres={self.genres!r}, "
-            f"last_name={self.last_name!r}, "
-            f"first_name={self.first_name!r}, "
-            f"lang={self.lang!r}, "
-            f"opt={self.opt!r})"
+#            f"file={self.file!r}, "
+            f"{self.title!r}, "
+#            f"genres={self.genres!r}, "
+            f"{self.last_name!r}, "
+            f"{self.first_name!r} "
+#            f"lang={self.lang!r}, "
+#            f"opt={self.opt!r}"
         )
 
     def __repr__(self):
@@ -54,6 +54,7 @@ def get_books(search_in):
     booklist: List[Book] = session.query(Book).filter(or_(Book.title.like(search), Book.first_name.like(search), Book.last_name.like(search))).all()
     session.close()
     pprint(booklist)
+    return(booklist)
 def main():
 #    Base.metadata.create_all(engine)
     get_books("Бушков")
