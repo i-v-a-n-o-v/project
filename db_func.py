@@ -1,7 +1,3 @@
-from typing import Optional
-
-from fastapi import FastAPI
-
 from datetime import datetime, timedelta
 from typing import List, Optional
 from pprint import pprint
@@ -18,28 +14,6 @@ from sqlalchemy import (
 )
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import declarative_base, sessionmaker, scoped_session
-
-
-app = FastAPI()
-
-
-@app.get("/", summary="Get a hello world json")
-def hello(
-    name: str = "World",
-):
-    """
-    Hello world view
-    1. processes `request`
-    1. returns greeting
-    """
-    return {"Hello": name}
-
-@app.get("/search/{sstring}")
-def ssearch(sstring):
-    qq: str = get_books(sstring)
-    return {"search": qq}
-
-
 
 
 engine = create_engine("sqlite:///lib.sqlite", echo=True)
@@ -80,5 +54,10 @@ def get_books(search_in):
     booklist: List[Book] = session.query(Book).filter(or_(Book.title.like(search), Book.first_name.like(search), Book.last_name.like(search))).all()
     session.close()
     pprint(booklist)
-    return (booklist)
+def main():
+#    Base.metadata.create_all(engine)
+    get_books("Бушков")
 
+
+if __name__ == "__main__":
+    main()
