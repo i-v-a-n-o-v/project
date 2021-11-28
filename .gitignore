@@ -129,3 +129,4 @@ dmypy.json
 .pyre/
 bib/
 lib.sqlite
+bot.conf
