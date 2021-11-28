@@ -40,7 +40,7 @@ class Book(Base):
             f"{self.title!r}, "
 #            f"genres={self.genres!r}, "
             f"{self.last_name!r}, "
-            f"{self.first_name!r} "
+            f"{self.first_name!r}\n"
 #            f"lang={self.lang!r}, "
 #            f"opt={self.opt!r}"
         )
@@ -51,7 +51,7 @@ class Book(Base):
 def get_books(search_in):
     search = "%{}%".format(search_in)
     session = Session()
-    booklist: List[Book] = session.query(Book).filter(or_(Book.title.like(search), Book.first_name.like(search), Book.last_name.like(search))).all()
+    booklist: List[Book] = session.query(Book).filter(or_(Book.title.like(search), Book.first_name.like(search), Book.last_name.like(search))).limit(20).all()
     session.close()
     pprint(booklist)
     return(booklist)
